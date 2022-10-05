@@ -1,0 +1,3503 @@
+<!DOCTYPE html>
+
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="https://animaproject.s3.amazonaws.com/home/favicon.png/"
+    />
+    <meta name="viewport" content="width=1800, maximum-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="https://animaproject.s3.amazonaws.com/home/favicon.png"
+    />
+    <meta name="og:type" content="website" />
+    <meta name="twitter:card" content="photo" />
+    <script id="anima-hotspots-script" src="hotspots.js"></script>
+    <script id="anima-overrides-script" src="overrides.js"></script>
+    <style>
+      @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+      @import url("https://fonts.googleapis.com/css?family=Open+Sans:700,600");
+
+      .component-wrapper a {
+        display: contents;
+        pointer-events: auto;
+        text-decoration: none;
+      }
+
+      .component-wrapper * {
+        -webkit-font-smoothing: antialiased;
+        box-sizing: border-box;
+        pointer-events: none;
+      }
+
+      .component-wrapper a *,
+      .component-wrapper input,
+      .component-wrapper video,
+      .component-wrapper iframe {
+        pointer-events: auto;
+      }
+
+      .component-wrapper.not-ready,
+      .component-wrapper.not-ready * {
+        visibility: hidden !important;
+      }
+
+      .screen a {
+        display: contents;
+        text-decoration: none;
+      }
+
+      .full-width-a {
+        width: 100%;
+      }
+
+      .full-height-a {
+        height: 100%;
+      }
+
+      .container-center-vertical {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .container-center-vertical > * {
+        flex-shrink: 0;
+        pointer-events: auto;
+      }
+
+      .container-center-horizontal {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        pointer-events: none;
+        width: 100%;
+      }
+
+      .container-center-horizontal > * {
+        flex-shrink: 0;
+        pointer-events: auto;
+      }
+
+      .auto-animated div {
+        --z-index: -1;
+        opacity: 0;
+        position: absolute;
+      }
+
+      .auto-animated input {
+        --z-index: -1;
+        opacity: 0;
+        position: absolute;
+      }
+
+      .auto-animated .container-center-vertical,
+      .auto-animated .container-center-horizontal {
+        opacity: 1;
+      }
+
+      .overlay {
+        display: none;
+        height: 100%;
+        opacity: 0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+      }
+
+      .overlay.animate-appear {
+        animation: reveal 0.3s ease-in-out 1 normal forwards;
+        display: block;
+        opacity: 0;
+      }
+
+      .overlay.animate-disappear {
+        animation: reveal 0.3s ease-in-out 1 reverse forwards;
+        display: block;
+        opacity: 1;
+        pointer-events: none;
+      }
+
+      .overlay.animate-disappear * {
+        pointer-events: none;
+      }
+
+      .animate-nodelay {
+        animation-delay: 0s;
+      }
+
+      .align-self-flex-start {
+        align-self: flex-start;
+      }
+
+      .align-self-flex-end {
+        align-self: flex-end;
+      }
+
+      .align-self-flex-center {
+        align-self: flex-center;
+      }
+
+      .valign-text-middle {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .valign-text-bottom {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+
+      input:focus {
+        outline: none;
+      }
+
+      .listeners-active,
+      .listeners-active * {
+        pointer-events: auto;
+      }
+
+      .hidden,
+      .hidden * {
+        pointer-events: none;
+        visibility: hidden;
+      }
+
+      .smart-layers-pointers,
+      .smart-layers-pointers * {
+        pointer-events: auto;
+        visibility: visible;
+      }
+
+      .listeners-active-click,
+      .listeners-active-click * {
+        cursor: pointer;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      :root {
+        --black: #000000;
+        --blue: #3665fc;
+        --bright-gray: #2e3f50;
+        --manatee: #969fa7;
+        --mercury: #e6e6e6;
+        --pale-sky: #6b7680;
+        --silver-sand: #c2c3c5;
+        --white: #ffffff;
+
+        --font-size-l: 16px;
+        --font-size-m: 14px;
+        --font-size-xl: 18px;
+        --font-size-xxl: 30px;
+
+        --font-family-open_sans: "Open Sans", Helvetica;
+      }
+      .opensans-semi-bold-black-14px {
+        color: var(--black);
+        font-family: var(--font-family-open_sans);
+        font-size: var(--font-size-m);
+        font-style: normal;
+        font-weight: 600;
+      }
+
+      .opensans-semi-bold-blue-14px {
+        color: var(--blue);
+        font-family: var(--font-family-open_sans);
+        font-size: var(--font-size-m);
+        font-style: normal;
+        font-weight: 600;
+      }
+
+      .opensans-semi-bold-pale-sky-14px {
+        color: var(--pale-sky);
+        font-family: var(--font-family-open_sans);
+        font-size: var(--font-size-m);
+        font-style: normal;
+        font-weight: 600;
+      }
+
+      .opensans-semi-bold-bright-gray-14px {
+        color: var(--bright-gray);
+        font-family: var(--font-family-open_sans);
+        font-size: var(--font-size-m);
+        font-style: normal;
+        font-weight: 600;
+      }
+
+      .opensans-semi-bold-white-14px {
+        font-family: var(--font-family-open_sans);
+        font-size: var(--font-size-m);
+        font-style: normal;
+        font-weight: 600;
+      }
+
+      .opensans-semi-bold-manatee-14px {
+        color: var(--manatee);
+        font-family: var(--font-family-open_sans);
+        font-size: var(--font-size-m);
+        font-style: normal;
+        font-weight: 600;
+      }
+
+      .opensans-bold-bright-gray-16px {
+        color: var(--bright-gray);
+        font-family: var(--font-family-open_sans);
+        font-size: var(--font-size-l);
+        font-style: normal;
+        font-weight: 700;
+      }
+
+      .border-1px-blue {
+        border: 1px solid var(--blue);
+      }
+
+      .border-1px-pale-sky {
+        border: 1px solid var(--pale-sky);
+      }
+
+      /* screen - 2-property-history-all-record-types */
+
+      .x2-property-history-all-record-types {
+        background-color: var(--white);
+        height: 1429px;
+        mix-blend-mode: normal;
+        overflow: hidden;
+        overflow-x: hidden;
+        position: relative;
+        width: 1800px;
+      }
+
+      .x2-property-history-all-record-types .legacy-top-nav {
+        background-color: transparent;
+        height: 120px;
+        left: 0px;
+        position: absolute;
+        top: 0px;
+        width: 1800px;
+      }
+
+      .x2-property-history-all-record-types .rectangle-7 {
+        background-color: #d41616;
+        height: 70px;
+        left: 0px;
+        mix-blend-mode: normal;
+        position: absolute;
+        top: 50px;
+        width: 1800px;
+      }
+
+      .x2-property-history-all-record-types .rectangle-8 {
+        background-color: var(--bright-gray);
+        height: 50px;
+        left: 0px;
+        mix-blend-mode: normal;
+        position: absolute;
+        top: 0px;
+        width: 1800px;
+      }
+
+      .x2-property-history-all-record-types .incident-history-filters {
+        align-items: flex-start;
+        background-color: transparent;
+        display: flex;
+        gap: 40px;
+        height: min-content;
+        left: 0px;
+        padding: 48px;
+        position: absolute;
+        top: 120px;
+        width: min-content;
+      }
+
+      .x2-property-history-all-record-types .filters {
+        align-items: flex-start;
+        background-color: transparent;
+        display: flex;
+        flex-direction: column;
+        height: 1002px;
+        mix-blend-mode: normal;
+        padding: 128px 0px;
+        position: relative;
+        width: min-content;
+      }
+
+      .x2-property-history-all-record-types .filters-1 {
+        align-items: flex-start;
+        background-color: #f8f8f9;
+        border: 1px solid var(--silver-sand);
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        height: min-content;
+        margin-left: -1px;
+        margin-right: -1px;
+        margin-top: -1px;
+        mix-blend-mode: normal;
+        padding: 24px 16px;
+        position: relative;
+        width: 265px;
+      }
+
+      .x2-property-history-all-record-types .filters-title-button {
+        align-items: center;
+        align-self: stretch;
+        background-color: transparent;
+        display: flex;
+        height: min-content;
+        justify-content: space-between;
+        padding: 0px 0px 0px 8px;
+        position: relative;
+      }
+
+      .x2-property-history-all-record-types .title {
+        align-items: flex-start;
+        background-color: transparent;
+        display: flex;
+        gap: 10px;
+        height: min-content;
+        padding: 4px 0px;
+        position: relative;
+        width: min-content;
+      }
+
+      .x2-property-history-all-record-types .refine-by {
+        background-color: transparent;
+        color: var(--bright-gray);
+        font-family: var(--font-family-open_sans);
+        font-size: var(--font-size-xl);
+        font-style: normal;
+        font-weight: 600;
+        letter-spacing: 0px;
+        line-height: 24px;
+        margin-top: -1px;
+        min-width: 81px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .clear {
+        align-items: center;
+        background-color: transparent;
+        display: flex;
+        height: 32px;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        width: min-content;
+      }
+
+      .x2-property-history-all-record-types .button {
+        align-items: center;
+        background-color: transparent;
+        border-radius: 4px;
+        display: flex;
+        gap: 8px;
+        height: 32px;
+        justify-content: center;
+        padding: 6px 8px;
+        position: relative;
+        width: min-content;
+      }
+
+      .x2-property-history-all-record-types .label-2 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        margin-top: -1px;
+        min-width: 55px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .category-accordion {
+        align-items: flex-start;
+        align-self: stretch;
+        background-color: transparent;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        height: min-content;
+        position: relative;
+      }
+
+      .x2-property-history-all-record-types .accordion-header {
+        align-items: center;
+        align-self: stretch;
+        background-color: transparent;
+        display: flex;
+        gap: 8px;
+        height: min-content;
+        position: relative;
+      }
+
+      .x2-property-history-all-record-types .accordion {
+        align-items: center;
+        background-color: transparent;
+        border-radius: 4px;
+        display: flex;
+        flex: 1;
+        gap: 8px;
+        height: min-content;
+        padding: 8px;
+        position: relative;
+      }
+
+      .x2-property-history-all-record-types .title-1 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        margin-top: -1px;
+        min-width: 98px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .label {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        margin-top: -1px;
+        min-width: 36px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .list-items-scrollbar {
+        align-items: flex-start;
+        align-self: stretch;
+        background-color: transparent;
+        display: flex;
+        gap: 16px;
+        height: min-content;
+        position: relative;
+      }
+
+      .x2-property-history-all-record-types .list-items {
+        align-items: flex-start;
+        background-color: transparent;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        gap: 8px;
+        height: min-content;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .x2-property-history-all-record-types .checkbox {
+        align-items: center;
+        background-color: transparent;
+        display: flex;
+        height: 28px;
+        position: relative;
+        width: min-content;
+      }
+
+      .x2-property-history-all-record-types .checkbox-1 {
+        align-items: center;
+        background-color: transparent;
+        display: flex;
+        gap: 8px;
+        height: 44px;
+        margin-bottom: -8px;
+        margin-top: -8px;
+        padding: 10px 8px;
+        position: relative;
+        width: min-content;
+      }
+
+      .x2-property-history-all-record-types .checkbox-2 {
+        align-items: center;
+        background-color: transparent;
+        display: flex;
+        height: 24px;
+        justify-content: center;
+        overflow: hidden;
+        padding: 10px;
+        position: relative;
+        width: 24px;
+      }
+
+      .x2-property-history-all-record-types .button-1 {
+        align-items: center;
+        background-color: var(--blue);
+        border-radius: 6px;
+        display: flex;
+        height: 24px;
+        justify-content: center;
+        margin-bottom: -10px;
+        margin-left: -10px;
+        margin-right: -10px;
+        margin-top: -10px;
+        mix-blend-mode: normal;
+        overflow: hidden;
+        position: relative;
+        width: 24px;
+      }
+
+      .x2-property-history-all-record-types .line-icon {
+        background-color: transparent;
+        height: 24px;
+        min-width: 24px;
+        position: relative;
+      }
+
+      .x2-property-history-all-record-types .label-3 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        min-width: 60px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .label-4 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        min-width: 56px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .checkbox-3-1 {
+        align-items: center;
+        background-color: transparent;
+        display: flex;
+        height: min-content;
+        position: relative;
+        width: min-content;
+      }
+
+      .x2-property-history-all-record-types .checkbox-5 {
+        align-items: center;
+        background-color: transparent;
+        display: flex;
+        gap: 4px;
+        height: min-content;
+        padding: 0px 8px 0px 0px;
+        position: relative;
+        width: min-content;
+      }
+
+      .x2-property-history-all-record-types .checkbox-6 {
+        align-items: center;
+        background-color: transparent;
+        display: flex;
+        height: min-content;
+        justify-content: center;
+        overflow: hidden;
+        padding: 8px;
+        position: relative;
+        width: min-content;
+      }
+
+      .x2-property-history-all-record-types .button-5 {
+        align-items: center;
+        background-color: var(--blue);
+        border-radius: 6px;
+        display: flex;
+        height: 24px;
+        justify-content: center;
+        mix-blend-mode: normal;
+        overflow: hidden;
+        position: relative;
+        width: 24px;
+      }
+
+      .x2-property-history-all-record-types .label-5 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        min-width: 66px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .divider-line {
+        align-items: flex-start;
+        align-self: stretch;
+        background-color: transparent;
+        display: flex;
+        flex-direction: column;
+        height: min-content;
+        position: relative;
+      }
+
+      .x2-property-history-all-record-types .divider {
+        align-self: stretch;
+        background-color: var(--silver-sand);
+        height: 1px;
+        min-width: 231px;
+        mix-blend-mode: normal;
+        position: relative;
+      }
+
+      .x2-property-history-all-record-types .accordion-header-1 {
+        align-items: center;
+        align-self: stretch;
+        background-color: transparent;
+        display: flex;
+        gap: 8px;
+        height: min-content;
+        position: relative;
+      }
+
+      .x2-property-history-all-record-types .title-2 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        margin-top: -1px;
+        min-width: 51px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .checkbox-3 {
+        align-items: center;
+        background-color: transparent;
+        display: flex;
+        gap: 8px;
+        height: 44px;
+        margin-bottom: -8px;
+        margin-top: -8px;
+        overflow: hidden;
+        padding: 10px 8px;
+        position: relative;
+        width: min-content;
+      }
+
+      .x2-property-history-all-record-types .checkbox-4 {
+        align-items: center;
+        background-color: transparent;
+        display: flex;
+        gap: 8px;
+        height: 24px;
+        justify-content: center;
+        overflow: hidden;
+        padding: 10px;
+        position: relative;
+        width: 24px;
+      }
+
+      .x2-property-history-all-record-types .button-2 {
+        background-color: var(--white);
+        border-radius: 6px;
+        height: 24px;
+        margin-bottom: -10px;
+        margin-left: -10px;
+        margin-right: -10px;
+        margin-top: -10px;
+        min-width: 24px;
+        mix-blend-mode: normal;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .x2-property-history-all-record-types .label-6 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        min-width: 42px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .label-7 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        min-width: 59px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .accordion-header-2 {
+        align-items: center;
+        align-self: stretch;
+        background-color: transparent;
+        display: flex;
+        gap: 8px;
+        height: min-content;
+        position: relative;
+      }
+
+      .x2-property-history-all-record-types .title-3 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        margin-top: -1px;
+        min-width: 109px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .button-6 {
+        align-items: center;
+        background-color: transparent;
+        display: flex;
+        gap: 6px;
+        height: 32px;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        width: min-content;
+      }
+
+      .x2-property-history-all-record-types .list-items-1 {
+        align-items: flex-start;
+        background-color: transparent;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        gap: 20px;
+        height: min-content;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .x2-property-history-all-record-types .label-8 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        min-width: 55px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .checkbox-2-1 {
+        align-items: center;
+        background-color: transparent;
+        display: flex;
+        height: 28px;
+        margin-right: -1px;
+        position: relative;
+        width: min-content;
+      }
+
+      .x2-property-history-all-record-types .label-9 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        margin-bottom: -7px;
+        margin-top: -9px;
+        min-width: 140px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+      }
+
+      .x2-property-history-all-record-types .checkbox-3-2 {
+        align-items: center;
+        background-color: transparent;
+        display: flex;
+        height: 28px;
+        margin-right: -4px;
+        position: relative;
+        width: min-content;
+      }
+
+      .x2-property-history-all-record-types .label-10 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        margin-bottom: -7px;
+        margin-top: -9px;
+        min-width: 143px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+      }
+
+      .x2-property-history-all-record-types .label-11 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        margin-bottom: -7px;
+        margin-top: -9px;
+        min-width: 123px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+      }
+
+      .x2-property-history-all-record-types .label-12 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        min-width: 106px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .frame-74 {
+        align-items: flex-start;
+        align-self: stretch;
+        background-color: transparent;
+        display: flex;
+        gap: 10px;
+        padding: 0px 8px 0px 0px;
+        position: relative;
+        width: min-content;
+      }
+
+      .x2-property-history-all-record-types .misc-scroll-bar {
+        align-self: stretch;
+        background-color: transparent;
+        height: 220px;
+        min-width: 20px;
+        mix-blend-mode: normal;
+        position: relative;
+      }
+
+      .x2-property-history-all-record-types .scroll-bar {
+        background-color: var(--mercury);
+        height: 220px;
+        left: 0px;
+        mix-blend-mode: normal;
+        overflow: hidden;
+        position: relative;
+        top: 0px;
+        width: 20px;
+      }
+
+      .x2-property-history-all-record-types .overlap-group {
+        background-color: transparent;
+        height: 398px;
+        left: 0px;
+        position: relative;
+        top: -184px;
+        width: 20px;
+      }
+
+      .x2-property-history-all-record-types .scroll {
+        background-color: #bdc3c7;
+        height: 50px;
+        left: 0px;
+        mix-blend-mode: normal;
+        position: absolute;
+        top: 201px;
+        width: 20px;
+      }
+
+      .x2-property-history-all-record-types .arrow-down {
+        background-color: transparent;
+        height: 398px;
+        left: 0px;
+        position: absolute;
+        top: 0px;
+        width: 15px;
+      }
+
+      .x2-property-history-all-record-types .rectangle-16 {
+        background-color: var(--mercury);
+        height: 17px;
+        left: 0px;
+        mix-blend-mode: normal;
+        position: absolute;
+        top: 0px;
+        width: 15px;
+      }
+
+      .x2-property-history-all-record-types .shape {
+        background-color: transparent;
+        height: 5px;
+        left: 5px;
+        mix-blend-mode: normal;
+        position: absolute;
+        top: 393px;
+        width: 9px;
+      }
+
+      .x2-property-history-all-record-types .arrow-up {
+        background-color: var(--mercury);
+        height: 17px;
+        left: 0px;
+        position: absolute;
+        top: 184px;
+        width: 15px;
+      }
+
+      .x2-property-history-all-record-types .shape-1 {
+        background-color: transparent;
+        height: 5px;
+        left: 5px;
+        mix-blend-mode: normal;
+        position: absolute;
+        top: 5px;
+        width: 9px;
+      }
+
+      .x2-property-history-all-record-types .incident-history {
+        align-items: flex-start;
+        background-color: transparent;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        height: min-content;
+        position: relative;
+        width: min-content;
+      }
+
+      .x2-property-history-all-record-types .frame-6 {
+        align-items: flex-start;
+        align-self: stretch;
+        background-color: transparent;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        height: min-content;
+        position: relative;
+      }
+
+      .x2-property-history-all-record-types .frame-7 {
+        align-items: center;
+        align-self: stretch;
+        background-color: transparent;
+        display: flex;
+        gap: 8px;
+        height: min-content;
+        position: relative;
+      }
+
+      .x2-property-history-all-record-types .title-4 {
+        align-items: center;
+        background-color: transparent;
+        display: flex;
+        gap: 24px;
+        height: min-content;
+        position: relative;
+        width: min-content;
+      }
+
+      .x2-property-history-all-record-types .title-5 {
+        background-color: transparent;
+        color: var(--bright-gray);
+        font-family: var(--font-family-open_sans);
+        font-size: var(--font-size-xxl);
+        font-style: normal;
+        font-weight: 700;
+        letter-spacing: 0px;
+        line-height: 44px;
+        margin-top: -1px;
+        min-width: 241px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .subheading {
+        align-items: center;
+        align-self: stretch;
+        background-color: transparent;
+        display: flex;
+        gap: 29px;
+        height: min-content;
+        position: relative;
+      }
+
+      .x2-property-history-all-record-types .title-6 {
+        align-items: center;
+        background-color: transparent;
+        display: flex;
+        flex: 1;
+        gap: 24px;
+        height: min-content;
+        position: relative;
+      }
+
+      .x2-property-history-all-record-types .you-can-view-all-inc {
+        background-color: transparent;
+        color: var(--bright-gray);
+        flex: 1;
+        font-family: var(--font-family-open_sans);
+        font-size: var(--font-size-l);
+        font-style: normal;
+        font-weight: 600;
+        letter-spacing: 0px;
+        line-height: 20px;
+        margin-top: -1px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .frame {
+        align-items: flex-start;
+        background-color: transparent;
+        display: flex;
+        gap: 24px;
+        height: min-content;
+        position: relative;
+        width: min-content;
+      }
+
+      .x2-property-history-all-record-types .incident-history-grid {
+        align-items: flex-start;
+        background-color: transparent;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        height: min-content;
+        position: relative;
+        width: 1088px;
+      }
+
+      .x2-property-history-all-record-types .table-row-1 {
+        align-items: center;
+        align-self: stretch;
+        background-color: transparent;
+        display: flex;
+        gap: 24px;
+        height: min-content;
+        padding: 4px;
+        position: relative;
+      }
+
+      .x2-property-history-all-record-types .table-value-10 {
+        align-items: center;
+        align-self: stretch;
+        background-color: transparent;
+        display: flex;
+        gap: 8px;
+        position: relative;
+        width: 136px;
+      }
+
+      .x2-property-history-all-record-types .table-value-11 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        margin-top: -1px;
+        min-width: 93px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .x-icon {
+        background-color: transparent;
+        height: 16px;
+        min-width: 16px;
+        mix-blend-mode: normal;
+        position: relative;
+      }
+
+      .x2-property-history-all-record-types .table-value-12 {
+        align-items: center;
+        background-color: transparent;
+        display: flex;
+        gap: 8px;
+        height: min-content;
+        overflow: hidden;
+        position: relative;
+        width: 144px;
+      }
+
+      .x2-property-history-all-record-types .table-value-13 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        margin-top: -1px;
+        min-width: 115px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .table-value-14 {
+        align-items: center;
+        align-self: stretch;
+        background-color: transparent;
+        display: flex;
+        gap: 8px;
+        position: relative;
+        width: 224px;
+      }
+
+      .x2-property-history-all-record-types .table-value-15 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        margin-top: -1px;
+        min-width: 92px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .table-value-16 {
+        align-items: center;
+        align-self: stretch;
+        background-color: transparent;
+        display: flex;
+        gap: 8px;
+        position: relative;
+        width: 104px;
+      }
+
+      .x2-property-history-all-record-types .table-value-17 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        margin-top: -1px;
+        min-width: 84px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .table-value {
+        align-items: center;
+        align-self: stretch;
+        background-color: transparent;
+        display: flex;
+        gap: 4px;
+        position: relative;
+        width: 196px;
+      }
+
+      .x2-property-history-all-record-types .table-value-18 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        margin-top: -1px;
+        min-width: 41px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .table-values {
+        align-items: flex-start;
+        align-self: stretch;
+        background-color: transparent;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        height: min-content;
+        position: relative;
+      }
+
+      .x2-property-history-all-record-types .border {
+        align-self: stretch;
+        background-color: var(--silver-sand);
+        height: 1px;
+        min-width: 1088px;
+        mix-blend-mode: normal;
+        position: relative;
+      }
+
+      .x2-property-history-all-record-types .table-row {
+        align-items: center;
+        background-color: transparent;
+        display: flex;
+        gap: 24px;
+        height: min-content;
+        padding: 16px 4px;
+        position: relative;
+        width: min-content;
+      }
+
+      .x2-property-history-all-record-types .table-value-1 {
+        align-items: center;
+        background-color: transparent;
+        display: flex;
+        gap: 4px;
+        height: min-content;
+        position: relative;
+        width: 136px;
+      }
+
+      .x2-property-history-all-record-types .table-value-2 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        margin-top: -1px;
+        min-width: 76px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+      }
+
+      .x2-property-history-all-record-types .table-value-3 {
+        align-items: center;
+        background-color: transparent;
+        display: flex;
+        gap: 8px;
+        height: 20px;
+        position: relative;
+        width: 144px;
+      }
+
+      .x2-property-history-all-record-types .table-value-4 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        margin-top: -1px;
+        min-width: 133px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .table-value-5 {
+        align-items: center;
+        background-color: transparent;
+        display: flex;
+        gap: 4px;
+        height: min-content;
+        position: relative;
+        width: 224px;
+      }
+
+      .x2-property-history-all-record-types .table-value-6 {
+        background-color: transparent;
+        flex: 1;
+        letter-spacing: 0px;
+        line-height: 20px;
+        margin-top: -1px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .frame-5 {
+        align-items: flex-start;
+        background-color: transparent;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        height: min-content;
+        padding: 0px 32px 0px 0px;
+        position: relative;
+        width: min-content;
+      }
+
+      .x2-property-history-all-record-types .table-value-7 {
+        align-items: center;
+        background-color: transparent;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        height: min-content;
+        justify-content: center;
+        position: relative;
+        width: 72px;
+      }
+
+      .x2-property-history-all-record-types .line-icon-1 {
+        background-color: transparent;
+        height: 20px;
+        min-width: 20px;
+        mix-blend-mode: normal;
+        position: relative;
+      }
+
+      .x2-property-history-all-record-types .property {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        min-width: 60px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .table-value-8 {
+        background-color: transparent;
+        flex: 1;
+        letter-spacing: 0px;
+        line-height: 20px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .button-3 {
+        align-items: center;
+        background-color: transparent;
+        display: flex;
+        height: 44px;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        width: min-content;
+      }
+
+      .x2-property-history-all-record-types .label-1 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        margin-top: -1px;
+        min-width: 96px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .property-1 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        min-width: 56px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .property-2 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        min-width: 66px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .table-value-9 {
+        background-color: transparent;
+        flex: 1;
+        letter-spacing: 0px;
+        line-height: 20px;
+        position: relative;
+        text-align: left;
+      }
+
+      .x2-property-history-all-record-types .property-3 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        min-width: 66px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .property-4 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        min-width: 56px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .property-5 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        min-width: 66px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .property-6 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        min-width: 56px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .property-7 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        min-width: 56px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .property-8 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        min-width: 66px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .property-9 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        min-width: 66px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .property-10 {
+        background-color: transparent;
+        letter-spacing: 0px;
+        line-height: 20px;
+        min-width: 66px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .pagination {
+        align-items: center;
+        background-color: transparent;
+        display: flex;
+        gap: 16px;
+        height: 39px;
+        justify-content: flex-end;
+        padding: 16px 0px;
+        position: relative;
+        width: 1088px;
+      }
+
+      .x2-property-history-all-record-types .pages {
+        align-items: center;
+        background-color: transparent;
+        display: flex;
+        height: min-content;
+        justify-content: flex-end;
+        margin-bottom: -21.5px;
+        margin-top: -21.5px;
+        position: relative;
+        width: min-content;
+      }
+
+      .x2-property-history-all-record-types .pagination-buttons {
+        align-items: center;
+        background-color: transparent;
+        display: flex;
+        height: 50px;
+        justify-content: center;
+        overflow: hidden;
+        padding: 5px;
+        position: relative;
+        width: 50px;
+      }
+
+      .x2-property-history-all-record-types .button-4 {
+        align-items: center;
+        background-color: var(--white);
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        height: 40px;
+        justify-content: center;
+        mix-blend-mode: normal;
+        overflow: hidden;
+        padding: 10px 18px;
+        position: relative;
+        width: 40px;
+      }
+
+      .x2-property-history-all-record-types .page {
+        background-color: transparent;
+        height: 20px;
+        letter-spacing: 0px;
+        line-height: 20px;
+        margin-left: -18px;
+        margin-right: -18px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: center;
+        white-space: nowrap;
+        width: 40px;
+      }
+
+      .x2-property-history-all-record-types .button-7 {
+        align-items: center;
+        background-color: var(--silver-sand);
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        height: 40px;
+        justify-content: center;
+        mix-blend-mode: normal;
+        overflow: hidden;
+        padding: 10px 18px;
+        position: relative;
+        width: 40px;
+      }
+
+      .x2-property-history-all-record-types .field-input {
+        align-items: flex-end;
+        background-color: transparent;
+        border-radius: 6px;
+        display: flex;
+        height: min-content;
+        margin-bottom: -16.5px;
+        margin-top: -16.5px;
+        position: relative;
+        width: 92px;
+      }
+
+      .x2-property-history-all-record-types .field {
+        align-items: center;
+        background-color: var(--white);
+        border: 1px solid var(--manatee);
+        border-radius: 6px;
+        display: flex;
+        flex: 1;
+        gap: 8px;
+        height: 40px;
+        mix-blend-mode: normal;
+        padding: 10px 16px;
+        position: relative;
+      }
+
+      .x2-property-history-all-record-types .text-w-leading-icon {
+        align-items: center;
+        background-color: transparent;
+        display: flex;
+        gap: 8px;
+        height: min-content;
+        overflow: hidden;
+        position: relative;
+        width: min-content;
+      }
+
+      .x2-property-history-all-record-types .value {
+        background-color: transparent;
+        color: var(--bright-gray);
+        font-family: var(--font-family-open_sans);
+        font-size: var(--font-size-l);
+        font-style: normal;
+        font-weight: 600;
+        letter-spacing: 0px;
+        line-height: 20px;
+        margin-top: -1px;
+        min-width: 19px;
+        mix-blend-mode: normal;
+        position: relative;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .x2-property-history-all-record-types .trailing-icon {
+        align-items: flex-start;
+        background-color: transparent;
+        display: flex;
+        flex: 1;
+        gap: 16px;
+        height: min-content;
+        justify-content: flex-end;
+        position: relative;
+      }
+
+      .x2-property-history-all-record-types .trailing-icon-1 {
+        background-color: transparent;
+        height: 16px;
+        min-width: 16px;
+        position: relative;
+      }
+    </style>
+  </head>
+  <body style="margin: 0; background: #ffffff">
+    <input
+      type="hidden"
+      id="anPageName"
+      name="page"
+      value="2-property-history-all-record-types"
+    />
+    <div
+      class="x2-property-history-all-record-types screen"
+      data-id="65:222450"
+    >
+      <div class="legacy-top-nav" data-id="65:222451">
+        <div class="rectangle-7" data-id="I65:222451;19:3734"></div>
+        <div class="rectangle-8" data-id="I65:222451;19:3735"></div>
+      </div>
+      <div class="incident-history-filters" data-id="65:222452">
+        <div class="filters" data-id="I65:222452;65:17360">
+          <div class="filters-1" data-id="I65:222452;65:17360;65:16661">
+            <div
+              class="filters-title-button"
+              data-id="I65:222452;65:17360;65:16661;4362:15408"
+            >
+              <div
+                class="title"
+                data-id="I65:222452;65:17360;65:16661;4362:15409"
+              >
+                <div
+                  class="refine-by"
+                  data-id="I65:222452;65:17360;65:16661;4362:15410"
+                >
+                  Refine by
+                </div>
+              </div>
+              <div
+                class="clear"
+                data-id="I65:222452;65:17360;65:16661;4362:15411"
+              >
+                <div
+                  class="button"
+                  data-id="I65:222452;65:17360;65:16661;4362:15411;1665:2875"
+                >
+                  <div
+                    class="label-2 opensans-semi-bold-blue-14px"
+                    data-id="I65:222452;65:17360;65:16661;4362:15411;1509:1914"
+                  >
+                    Clear all
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="category-accordion"
+              data-id="I65:222452;65:17360;65:16661;4187:23034"
+            >
+              <div
+                class="accordion-header"
+                data-id="I65:222452;65:17360;65:16661;4187:23035"
+              >
+                <div
+                  class="accordion"
+                  data-id="I65:222452;65:17360;65:16661;4362:14329"
+                >
+                  <div
+                    class="title-1 opensans-bold-bright-gray-16px"
+                    data-id="I65:222452;65:17360;65:16661;4362:14329;4362:14194"
+                  >
+                    Record Type
+                  </div>
+                </div>
+                <div
+                  class="clear"
+                  data-id="I65:222452;65:17360;65:16661;4251:15055"
+                >
+                  <div
+                    class="button"
+                    data-id="I65:222452;65:17360;65:16661;4251:15055;1665:2875"
+                  >
+                    <div
+                      class="label opensans-semi-bold-blue-14px"
+                      data-id="I65:222452;65:17360;65:16661;4251:15055;1509:1914"
+                    >
+                      Clear
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="list-items-scrollbar"
+                data-id="I65:222452;65:17360;65:16661;4187:23040"
+              >
+                <div
+                  class="list-items"
+                  data-id="I65:222452;65:17360;65:16661;4187:23041"
+                >
+                  <div
+                    class="checkbox"
+                    data-id="I65:222452;65:17360;65:16661;4187:23042"
+                  >
+                    <div
+                      class="checkbox-1"
+                      data-id="I65:222452;65:17360;65:16661;4187:23042;1716:10007"
+                    >
+                      <div
+                        class="checkbox-2"
+                        data-id="I65:222452;65:17360;65:16661;4187:23042;1716:10008"
+                      >
+                        <div
+                          class="button-1"
+                          data-id="I65:222452;65:17360;65:16661;4187:23042;1716:10008;1716:9986"
+                        >
+                          <img
+                            class="line-icon"
+                            data-id="I65:222452;65:17360;65:16661;4187:23042;1716:10008;1716:9987"
+                            src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                            anima-src="https://anima-uploads.s3.amazonaws.com/projects/62f29f4d67ca433ae257c9c2/releases/62f2a972baaeeff7ab255b7f/img/line-icon@2x.svg"
+                          />
+                        </div>
+                      </div>
+                      <div
+                        class="label-3 opensans-semi-bold-bright-gray-14px"
+                        data-id="I65:222452;65:17360;65:16661;4187:23042;1716:10009"
+                      >
+                        Property
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="checkbox"
+                    data-id="I65:222452;65:17360;65:16661;4187:23043"
+                  >
+                    <div
+                      class="checkbox-1"
+                      data-id="I65:222452;65:17360;65:16661;4187:23043;1716:10007"
+                    >
+                      <div
+                        class="checkbox-2"
+                        data-id="I65:222452;65:17360;65:16661;4187:23043;1716:10008"
+                      >
+                        <div
+                          class="button-1"
+                          data-id="I65:222452;65:17360;65:16661;4187:23043;1716:10008;1716:9986"
+                        >
+                          <img
+                            class="line-icon"
+                            data-id="I65:222452;65:17360;65:16661;4187:23043;1716:10008;1716:9987"
+                            src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                            anima-src="https://anima-uploads.s3.amazonaws.com/projects/62f29f4d67ca433ae257c9c2/releases/62f2a972baaeeff7ab255b7f/img/line-icon@2x.svg"
+                          />
+                        </div>
+                      </div>
+                      <div
+                        class="label-4 opensans-semi-bold-bright-gray-14px"
+                        data-id="I65:222452;65:17360;65:16661;4187:23043;1716:10009"
+                      >
+                        Building
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="checkbox-3-1"
+                    data-id="I65:222452;65:17360;65:16661;4187:23044"
+                  >
+                    <div
+                      class="checkbox-5"
+                      data-id="I65:222452;65:17360;65:16661;4187:23044;1716:10007"
+                    >
+                      <div
+                        class="checkbox-6"
+                        data-id="I65:222452;65:17360;65:16661;4187:23044;1716:10008"
+                      >
+                        <div
+                          class="button-5"
+                          data-id="I65:222452;65:17360;65:16661;4187:23044;1716:10008;1716:9986"
+                        >
+                          <img
+                            class="line-icon"
+                            data-id="I65:222452;65:17360;65:16661;4187:23044;1716:10008;1716:9987"
+                            src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                            anima-src="https://anima-uploads.s3.amazonaws.com/projects/62f29f4d67ca433ae257c9c2/releases/62f2a972baaeeff7ab255b7f/img/line-icon@2x.svg"
+                          />
+                        </div>
+                      </div>
+                      <div
+                        class="label-5 opensans-semi-bold-bright-gray-14px"
+                        data-id="I65:222452;65:17360;65:16661;4187:23044;1716:10009"
+                      >
+                        Occupant
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="divider-line"
+                data-id="I65:222452;65:17360;65:16661;4187:23049"
+              >
+                <div
+                  class="divider"
+                  data-id="I65:222452;65:17360;65:16661;4187:23050"
+                ></div>
+              </div>
+            </div>
+            <div
+              class="category-accordion"
+              data-id="I65:222452;65:17360;65:16661;4187:23051"
+            >
+              <div
+                class="accordion-header-1"
+                data-id="I65:222452;65:17360;65:16661;4362:14503"
+              >
+                <div
+                  class="accordion"
+                  data-id="I65:222452;65:17360;65:16661;4362:14504"
+                >
+                  <div
+                    class="title-2 opensans-bold-bright-gray-16px"
+                    data-id="I65:222452;65:17360;65:16661;4362:14504;4362:14194"
+                  >
+                    Status
+                  </div>
+                </div>
+                <div
+                  class="clear"
+                  data-id="I65:222452;65:17360;65:16661;4362:14505"
+                >
+                  <div
+                    class="button"
+                    data-id="I65:222452;65:17360;65:16661;4362:14505;1665:2875"
+                  >
+                    <div
+                      class="label opensans-semi-bold-blue-14px"
+                      data-id="I65:222452;65:17360;65:16661;4362:14505;1509:1914"
+                    >
+                      Clear
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="list-items-scrollbar"
+                data-id="I65:222452;65:17360;65:16661;4187:23057"
+              >
+                <div
+                  class="list-items"
+                  data-id="I65:222452;65:17360;65:16661;4187:23058"
+                >
+                  <div
+                    class="checkbox"
+                    data-id="I65:222452;65:17360;65:16661;4187:23059"
+                  >
+                    <div
+                      class="checkbox-3"
+                      data-id="I65:222452;65:17360;65:16661;4187:23059;1716:10023"
+                    >
+                      <div
+                        class="checkbox-4"
+                        data-id="I65:222452;65:17360;65:16661;4187:23059;1716:10024"
+                      >
+                        <div
+                          class="button-2 border-1px-pale-sky"
+                          data-id="I65:222452;65:17360;65:16661;4187:23059;1716:10024;1716:9998"
+                        ></div>
+                      </div>
+                      <div
+                        class="label-6 opensans-semi-bold-bright-gray-14px"
+                        data-id="I65:222452;65:17360;65:16661;4187:23059;1716:10025"
+                      >
+                        Active
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="checkbox"
+                    data-id="I65:222452;65:17360;65:16661;4187:23060"
+                  >
+                    <div
+                      class="checkbox-3"
+                      data-id="I65:222452;65:17360;65:16661;4187:23060;1716:10023"
+                    >
+                      <div
+                        class="checkbox-4"
+                        data-id="I65:222452;65:17360;65:16661;4187:23060;1716:10024"
+                      >
+                        <div
+                          class="button-2 border-1px-pale-sky"
+                          data-id="I65:222452;65:17360;65:16661;4187:23060;1716:10024;1716:9998"
+                        ></div>
+                      </div>
+                      <div
+                        class="label-7 opensans-semi-bold-bright-gray-14px"
+                        data-id="I65:222452;65:17360;65:16661;4187:23060;1716:10025"
+                      >
+                        Deactive
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="divider-line"
+                data-id="I65:222452;65:17360;65:16661;4187:23066"
+              >
+                <div
+                  class="divider"
+                  data-id="I65:222452;65:17360;65:16661;4187:23067"
+                ></div>
+              </div>
+            </div>
+            <div
+              class="category-accordion"
+              data-id="I65:222452;65:17360;65:16661;4187:23085"
+            >
+              <div
+                class="accordion-header-2"
+                data-id="I65:222452;65:17360;65:16661;4362:14682"
+              >
+                <div
+                  class="accordion"
+                  data-id="I65:222452;65:17360;65:16661;4362:14683"
+                >
+                  <div
+                    class="title-3 opensans-bold-bright-gray-16px"
+                    data-id="I65:222452;65:17360;65:16661;4362:14683;4362:14194"
+                  >
+                    Incident Type
+                  </div>
+                </div>
+                <div
+                  class="button-6"
+                  data-id="I65:222452;65:17360;65:16661;4362:14898"
+                >
+                  <div
+                    class="button"
+                    data-id="I65:222452;65:17360;65:16661;4362:14898;1665:2893"
+                  >
+                    <div
+                      class="label opensans-semi-bold-pale-sky-14px"
+                      data-id="I65:222452;65:17360;65:16661;4362:14898;1510:2840"
+                    >
+                      Clear
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="list-items-scrollbar"
+                data-id="I65:222452;65:17360;65:16661;4187:23091"
+              >
+                <div
+                  class="list-items-1"
+                  data-id="I65:222452;65:17360;65:16661;4187:23092"
+                >
+                  <div
+                    class="checkbox"
+                    data-id="I65:222452;65:17360;65:16661;4187:23093"
+                  >
+                    <div
+                      class="checkbox-3"
+                      data-id="I65:222452;65:17360;65:16661;4187:23093;1716:10023"
+                    >
+                      <div
+                        class="checkbox-4"
+                        data-id="I65:222452;65:17360;65:16661;4187:23093;1716:10024"
+                      >
+                        <div
+                          class="button-2 border-1px-pale-sky"
+                          data-id="I65:222452;65:17360;65:16661;4187:23093;1716:10024;1716:9998"
+                        ></div>
+                      </div>
+                      <div
+                        class="label-8 opensans-semi-bold-bright-gray-14px"
+                        data-id="I65:222452;65:17360;65:16661;4187:23093;1716:10025"
+                      >
+                        (1) - Fire
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="checkbox-2-1"
+                    data-id="I65:222452;65:17360;65:16661;4187:23094"
+                  >
+                    <div
+                      class="checkbox-3"
+                      data-id="I65:222452;65:17360;65:16661;4187:23094;1716:10023"
+                    >
+                      <div
+                        class="checkbox-4"
+                        data-id="I65:222452;65:17360;65:16661;4187:23094;1716:10024"
+                      >
+                        <div
+                          class="button-2 border-1px-pale-sky"
+                          data-id="I65:222452;65:17360;65:16661;4187:23094;1716:10024;1716:9998"
+                        ></div>
+                      </div>
+                      <p
+                        class="label-9 opensans-semi-bold-bright-gray-14px"
+                        data-id="I65:222452;65:17360;65:16661;4187:23094;1716:10025"
+                      >
+                        (2) - Overpressure <br />Rupture, explosion...
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="checkbox-3-2"
+                    data-id="I65:222452;65:17360;65:16661;4187:23095"
+                  >
+                    <div
+                      class="checkbox-3"
+                      data-id="I65:222452;65:17360;65:16661;4187:23095;1716:10023"
+                    >
+                      <div
+                        class="checkbox-4"
+                        data-id="I65:222452;65:17360;65:16661;4187:23095;1716:10024"
+                      >
+                        <div
+                          class="button-2 border-1px-pale-sky"
+                          data-id="I65:222452;65:17360;65:16661;4187:23095;1716:10024;1716:9998"
+                        ></div>
+                      </div>
+                      <p
+                        class="label-10 opensans-semi-bold-bright-gray-14px"
+                        data-id="I65:222452;65:17360;65:16661;4187:23095;1716:10025"
+                      >
+                        (3) - Rescue &amp;<br />Emergency Medical...
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="checkbox"
+                    data-id="I65:222452;65:17360;65:16661;4187:23096"
+                  >
+                    <div
+                      class="checkbox-3"
+                      data-id="I65:222452;65:17360;65:16661;4187:23096;1716:10023"
+                    >
+                      <div
+                        class="checkbox-4"
+                        data-id="I65:222452;65:17360;65:16661;4187:23096;1716:10024"
+                      >
+                        <div
+                          class="button-2 border-1px-pale-sky"
+                          data-id="I65:222452;65:17360;65:16661;4187:23096;1716:10024;1716:9998"
+                        ></div>
+                      </div>
+                      <p
+                        class="label-11 opensans-semi-bold-bright-gray-14px"
+                        data-id="I65:222452;65:17360;65:16661;4187:23096;1716:10025"
+                      >
+                        (4) - Hazardous <br />Condition (no fire)
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="checkbox"
+                    data-id="I65:222452;65:17360;65:16661;4187:23097"
+                  >
+                    <div
+                      class="checkbox-3"
+                      data-id="I65:222452;65:17360;65:16661;4187:23097;1716:10023"
+                    >
+                      <div
+                        class="checkbox-4"
+                        data-id="I65:222452;65:17360;65:16661;4187:23097;1716:10024"
+                      >
+                        <div
+                          class="button-2 border-1px-pale-sky"
+                          data-id="I65:222452;65:17360;65:16661;4187:23097;1716:10024;1716:9998"
+                        ></div>
+                      </div>
+                      <div
+                        class="label-12 opensans-semi-bold-bright-gray-14px"
+                        data-id="I65:222452;65:17360;65:16661;4187:23097;1716:10025"
+                      >
+                        (5) - Service Call
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="frame-74"
+                  data-id="I65:222452;65:17360;65:16661;4187:23098"
+                >
+                  <div
+                    class="misc-scroll-bar"
+                    data-id="I65:222452;65:17360;65:16661;4187:23099"
+                  >
+                    <div
+                      class="scroll-bar"
+                      data-id="I65:222452;65:17360;65:16661;4187:23099;0:945"
+                    >
+                      <div class="overlap-group" data-id="2726231142850672531">
+                        <div
+                          class="scroll"
+                          data-id="I65:222452;65:17360;65:16661;4187:23099;0:949"
+                        ></div>
+                        <div
+                          class="arrow-down"
+                          data-id="I65:222452;65:17360;65:16661;4187:23099;644:3"
+                        >
+                          <div
+                            class="rectangle-16"
+                            data-id="I65:222452;65:17360;65:16661;4187:23099;644:1"
+                          ></div>
+                          <img
+                            class="shape"
+                            data-id="I65:222452;65:17360;65:16661;4187:23099;0:947"
+                            src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                            anima-src="https://anima-uploads.s3.amazonaws.com/projects/62f29f4d67ca433ae257c9c2/releases/62f2a972baaeeff7ab255b7f/img/shape@2x.svg"
+                          />
+                        </div>
+                        <div
+                          class="arrow-up"
+                          data-id="I65:222452;65:17360;65:16661;4187:23099;644:2"
+                        >
+                          <img
+                            class="shape-1"
+                            data-id="I65:222452;65:17360;65:16661;4187:23099;0:948"
+                            src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                            anima-src="https://anima-uploads.s3.amazonaws.com/projects/62f29f4d67ca433ae257c9c2/releases/62f2a972baaeeff7ab255b7f/img/shape-1@2x.svg"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="incident-history" data-id="I65:222452;65:220285">
+          <div class="frame-6" data-id="I65:222452;65:220285;19:2849">
+            <div class="frame-7" data-id="I65:222452;65:220285;19:3427">
+              <div class="title-4" data-id="I65:222452;65:220285;19:2851">
+                <h1
+                  class="title-5 valign-text-bottom"
+                  data-id="I65:222452;65:220285;19:2853"
+                >
+                  Incident History
+                </h1>
+              </div>
+            </div>
+            <div class="subheading" data-id="I65:222452;65:220285;19:2854">
+              <div class="title-6" data-id="I65:222452;65:220285;19:2855">
+                <p
+                  class="you-can-view-all-inc valign-text-bottom"
+                  data-id="I65:222452;65:220285;19:2857"
+                >
+                  You can view all incidents for the buildings and occupants
+                  associated with the Smart University property by using the
+                  filters.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="frame" data-id="I65:222452;65:220285;65:114672">
+            <div class="frame" data-id="I65:222452;65:220285;65:38886">
+              <div
+                class="incident-history-grid"
+                data-id="I65:222452;65:220285;19:2858"
+              >
+                <div
+                  class="table-row-1 opensans-semi-bold-pale-sky-14px"
+                  data-id="I65:222452;65:220285;19:2859"
+                >
+                  <div
+                    class="table-value-10"
+                    data-id="I65:222452;65:220285;19:2859;2:2262"
+                  >
+                    <div
+                      class="table-value-11 valign-text-middle"
+                      data-id="I65:222452;65:220285;19:2859;2:2262;2:2226"
+                    >
+                      Incident Time
+                    </div>
+                    <img
+                      class="x-icon"
+                      data-id="I65:222452;65:220285;19:2859;2:2262;2:2227"
+                      src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                      anima-src="https://anima-uploads.s3.amazonaws.com/projects/62f29f4d67ca433ae257c9c2/releases/62f2a972baaeeff7ab255b7f/img/line-icon-3@2x.svg"
+                    />
+                  </div>
+                  <div
+                    class="table-value-12"
+                    data-id="I65:222452;65:220285;19:2859;2:2259"
+                  >
+                    <div
+                      class="table-value-13 valign-text-middle"
+                      data-id="I65:222452;65:220285;19:2859;2:2259;2:2226"
+                    >
+                      Incident Number
+                    </div>
+                  </div>
+                  <div
+                    class="table-value-14"
+                    data-id="I65:222452;65:220285;19:2859;2:2260"
+                  >
+                    <div
+                      class="table-value-15 valign-text-middle"
+                      data-id="I65:222452;65:220285;19:2859;2:2260;2:2226"
+                    >
+                      Incident Type
+                    </div>
+                    <img
+                      class="x-icon"
+                      data-id="I65:222452;65:220285;19:2859;2:2260;2:2227"
+                      src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                      anima-src="https://anima-uploads.s3.amazonaws.com/projects/62f29f4d67ca433ae257c9c2/releases/62f2a972baaeeff7ab255b7f/img/line-icon-4@2x.svg"
+                    />
+                  </div>
+                  <div
+                    class="table-value-16"
+                    data-id="I65:222452;65:220285;19:2859;11:4320"
+                  >
+                    <div
+                      class="table-value-17 valign-text-middle"
+                      data-id="I65:222452;65:220285;19:2859;11:4320;2:2226"
+                    >
+                      Record Type
+                    </div>
+                  </div>
+                  <div
+                    class="table-value"
+                    data-id="I65:222452;65:220285;19:2859;2:2264"
+                  >
+                    <div
+                      class="table-value-18 valign-text-middle"
+                      data-id="I65:222452;65:220285;19:2859;2:2264;2:2231"
+                    >
+                      Name
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="table-values"
+                  data-id="I65:222452;65:220285;19:2860"
+                >
+                  <div
+                    class="border"
+                    data-id="I65:222452;65:220285;19:2861"
+                  ></div>
+                  <div class="table-row" data-id="I65:222452;65:220285;19:2862">
+                    <div
+                      class="table-value-1"
+                      data-id="I65:222452;65:220285;19:2862;2:2241"
+                    >
+                      <div
+                        class="table-value-2 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;19:2862;2:2241;2:2216"
+                      >
+                        06/01/2022<br />@ 00:00
+                      </div>
+                    </div>
+                    <div
+                      class="table-value-3"
+                      data-id="I65:222452;65:220285;19:2862;2:2238"
+                    >
+                      <div
+                        class="table-value-4 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;19:2862;2:2238;2:2216"
+                      >
+                        000000-000000-ABC
+                      </div>
+                    </div>
+                    <div
+                      class="table-value-5"
+                      data-id="I65:222452;65:220285;19:2862;2:2239"
+                    >
+                      <p
+                        class="table-value-6 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;19:2862;2:2239;2:2216"
+                      >
+                        (000) - Incident type from list
+                      </p>
+                    </div>
+                    <div
+                      class="frame-5"
+                      data-id="I65:222452;65:220285;19:2862;9:5695"
+                    >
+                      <div
+                        class="table-value-7"
+                        data-id="I65:222452;65:220285;19:2862;9:2266"
+                      >
+                        <img
+                          class="line-icon-1"
+                          data-id="I65:222452;65:220285;19:2862;9:2266;2:2220"
+                          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                          anima-src="https://anima-uploads.s3.amazonaws.com/projects/62f29f4d67ca433ae257c9c2/releases/62f2a972baaeeff7ab255b7f/img/line-icon-5@2x.svg"
+                        />
+                        <div
+                          class="property valign-text-middle opensans-semi-bold-black-14px"
+                          data-id="I65:222452;65:220285;19:2862;9:2266;2:2221"
+                        >
+                          Property
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="table-value"
+                      data-id="I65:222452;65:220285;19:2862;2:2243"
+                    >
+                      <div
+                        class="table-value-8 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;19:2862;2:2243;2:2216"
+                      >
+                        Smart University
+                      </div>
+                    </div>
+                    <div
+                      class="button-3"
+                      data-id="I65:222452;65:220285;19:2862;10:1398"
+                    >
+                      <div
+                        class="button border-1px-blue"
+                        data-id="I65:222452;65:220285;19:2862;10:1398;1665:2877"
+                      >
+                        <div
+                          class="label-1 opensans-semi-bold-blue-14px"
+                          data-id="I65:222452;65:220285;19:2862;10:1398;1510:2031"
+                        >
+                          Open incident
+                        </div>
+                        <img
+                          class="x-icon"
+                          data-id="I65:222452;65:220285;19:2862;10:1398;1647:3551"
+                          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                          anima-src="https://anima-uploads.s3.amazonaws.com/projects/62f29f4d67ca433ae257c9c2/releases/62f2a972baaeeff7ab255b7f/img/trailing-icon@2x.svg"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="border"
+                    data-id="I65:222452;65:220285;19:2863"
+                  ></div>
+                  <div class="table-row" data-id="I65:222452;65:220285;19:2864">
+                    <div
+                      class="table-value-1"
+                      data-id="I65:222452;65:220285;19:2864;2:2241"
+                    >
+                      <div
+                        class="table-value-2 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;19:2864;2:2241;2:2216"
+                      >
+                        11/06/2021<br />@ 00:00
+                      </div>
+                    </div>
+                    <div
+                      class="table-value-3"
+                      data-id="I65:222452;65:220285;19:2864;2:2238"
+                    >
+                      <div
+                        class="table-value-4 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;19:2864;2:2238;2:2216"
+                      >
+                        000000-000000-ABC
+                      </div>
+                    </div>
+                    <div
+                      class="table-value-5"
+                      data-id="I65:222452;65:220285;19:2864;2:2239"
+                    >
+                      <p
+                        class="table-value-6 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;19:2864;2:2239;2:2216"
+                      >
+                        (000) - Incident type from list
+                      </p>
+                    </div>
+                    <div
+                      class="frame-5"
+                      data-id="I65:222452;65:220285;19:2864;9:5695"
+                    >
+                      <div
+                        class="table-value-7"
+                        data-id="I65:222452;65:220285;19:2864;9:2266"
+                      >
+                        <img
+                          class="line-icon-1"
+                          data-id="I65:222452;65:220285;19:2864;9:2266;2:2220"
+                          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                          anima-src="https://anima-uploads.s3.amazonaws.com/projects/62f29f4d67ca433ae257c9c2/releases/62f2a972baaeeff7ab255b7f/img/line-icon-6@2x.svg"
+                        />
+                        <div
+                          class="property-1 valign-text-middle opensans-semi-bold-black-14px"
+                          data-id="I65:222452;65:220285;19:2864;9:2266;2:2221"
+                        >
+                          Building
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="table-value"
+                      data-id="I65:222452;65:220285;19:2864;2:2243"
+                    >
+                      <div
+                        class="table-value-8 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;19:2864;2:2243;2:2216"
+                      >
+                        Biomedical Research Center
+                      </div>
+                    </div>
+                    <div
+                      class="button-3"
+                      data-id="I65:222452;65:220285;19:2864;10:1398"
+                    >
+                      <div
+                        class="button border-1px-blue"
+                        data-id="I65:222452;65:220285;19:2864;10:1398;1665:2877"
+                      >
+                        <div
+                          class="label-1 opensans-semi-bold-blue-14px"
+                          data-id="I65:222452;65:220285;19:2864;10:1398;1510:2031"
+                        >
+                          Open incident
+                        </div>
+                        <img
+                          class="x-icon"
+                          data-id="I65:222452;65:220285;19:2864;10:1398;1647:3551"
+                          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                          anima-src="https://anima-uploads.s3.amazonaws.com/projects/62f29f4d67ca433ae257c9c2/releases/62f2a972baaeeff7ab255b7f/img/trailing-icon@2x.svg"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="border"
+                    data-id="I65:222452;65:220285;19:2865"
+                  ></div>
+                  <div class="table-row" data-id="I65:222452;65:220285;19:2866">
+                    <div
+                      class="table-value-1"
+                      data-id="I65:222452;65:220285;19:2866;2:2241"
+                    >
+                      <div
+                        class="table-value-2 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;19:2866;2:2241;2:2216"
+                      >
+                        10/25/2021<br />@ 00:00
+                      </div>
+                    </div>
+                    <div
+                      class="table-value-3"
+                      data-id="I65:222452;65:220285;19:2866;2:2238"
+                    >
+                      <div
+                        class="table-value-4 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;19:2866;2:2238;2:2216"
+                      >
+                        000000-000000-ABC
+                      </div>
+                    </div>
+                    <div
+                      class="table-value-5"
+                      data-id="I65:222452;65:220285;19:2866;2:2239"
+                    >
+                      <p
+                        class="table-value-6 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;19:2866;2:2239;2:2216"
+                      >
+                        (000) - Incident type from list
+                      </p>
+                    </div>
+                    <div
+                      class="frame-5"
+                      data-id="I65:222452;65:220285;19:2866;9:5695"
+                    >
+                      <div
+                        class="table-value-7"
+                        data-id="I65:222452;65:220285;19:2866;9:2266"
+                      >
+                        <img
+                          class="line-icon-1"
+                          data-id="I65:222452;65:220285;19:2866;9:2266;2:2220"
+                          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                          anima-src="https://anima-uploads.s3.amazonaws.com/projects/62f29f4d67ca433ae257c9c2/releases/62f2a972baaeeff7ab255b7f/img/line-icon-7@2x.svg"
+                        />
+                        <div
+                          class="property-2 valign-text-middle opensans-semi-bold-black-14px"
+                          data-id="I65:222452;65:220285;19:2866;9:2266;2:2221"
+                        >
+                          Occupant
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="table-value"
+                      data-id="I65:222452;65:220285;19:2866;2:2243"
+                    >
+                      <div
+                        class="table-value-9 valign-text-middle opensans-semi-bold-white-14px"
+                        data-id="I65:222452;65:220285;19:2866;2:2243;2:2216"
+                      >
+                        <span
+                          ><span class="opensans-semi-bold-black-14px"
+                            >Unit 325<br /></span
+                          ><span class="opensans-semi-bold-pale-sky-14px"
+                            >Residence Hall 200</span
+                          ></span
+                        >
+                      </div>
+                    </div>
+                    <div
+                      class="button-3"
+                      data-id="I65:222452;65:220285;19:2866;10:1398"
+                    >
+                      <div
+                        class="button border-1px-blue"
+                        data-id="I65:222452;65:220285;19:2866;10:1398;1665:2877"
+                      >
+                        <div
+                          class="label-1 opensans-semi-bold-blue-14px"
+                          data-id="I65:222452;65:220285;19:2866;10:1398;1510:2031"
+                        >
+                          Open incident
+                        </div>
+                        <img
+                          class="x-icon"
+                          data-id="I65:222452;65:220285;19:2866;10:1398;1647:3551"
+                          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                          anima-src="https://anima-uploads.s3.amazonaws.com/projects/62f29f4d67ca433ae257c9c2/releases/62f2a972baaeeff7ab255b7f/img/trailing-icon@2x.svg"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="border"
+                    data-id="I65:222452;65:220285;19:2867"
+                  ></div>
+                  <div class="table-row" data-id="I65:222452;65:220285;19:2868">
+                    <div
+                      class="table-value-1"
+                      data-id="I65:222452;65:220285;19:2868;2:2241"
+                    >
+                      <div
+                        class="table-value-2 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;19:2868;2:2241;2:2216"
+                      >
+                        02/04/2021<br />@ 00:00
+                      </div>
+                    </div>
+                    <div
+                      class="table-value-3"
+                      data-id="I65:222452;65:220285;19:2868;2:2238"
+                    >
+                      <div
+                        class="table-value-4 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;19:2868;2:2238;2:2216"
+                      >
+                        000000-000000-ABC
+                      </div>
+                    </div>
+                    <div
+                      class="table-value-5"
+                      data-id="I65:222452;65:220285;19:2868;2:2239"
+                    >
+                      <p
+                        class="table-value-6 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;19:2868;2:2239;2:2216"
+                      >
+                        (000) - Incident type from list
+                      </p>
+                    </div>
+                    <div
+                      class="frame-5"
+                      data-id="I65:222452;65:220285;19:2868;9:5695"
+                    >
+                      <div
+                        class="table-value-7"
+                        data-id="I65:222452;65:220285;19:2868;9:2266"
+                      >
+                        <img
+                          class="line-icon-1"
+                          data-id="I65:222452;65:220285;19:2868;9:2266;2:2220"
+                          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                          anima-src="https://anima-uploads.s3.amazonaws.com/projects/62f29f4d67ca433ae257c9c2/releases/62f2a972baaeeff7ab255b7f/img/line-icon-7@2x.svg"
+                        />
+                        <div
+                          class="property-3 valign-text-middle opensans-semi-bold-black-14px"
+                          data-id="I65:222452;65:220285;19:2868;9:2266;2:2221"
+                        >
+                          Occupant
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="table-value"
+                      data-id="I65:222452;65:220285;19:2868;2:2243"
+                    >
+                      <div
+                        class="table-value-9 valign-text-middle opensans-semi-bold-white-14px"
+                        data-id="I65:222452;65:220285;19:2868;2:2243;2:2216"
+                      >
+                        <span
+                          ><span class="opensans-semi-bold-black-14px"
+                            >Facilities Management<br /></span
+                          ><span class="opensans-semi-bold-pale-sky-14px"
+                            >Campus Services Center</span
+                          ></span
+                        >
+                      </div>
+                    </div>
+                    <div
+                      class="button-3"
+                      data-id="I65:222452;65:220285;19:2868;10:1398"
+                    >
+                      <div
+                        class="button border-1px-blue"
+                        data-id="I65:222452;65:220285;19:2868;10:1398;1665:2877"
+                      >
+                        <div
+                          class="label-1 opensans-semi-bold-blue-14px"
+                          data-id="I65:222452;65:220285;19:2868;10:1398;1510:2031"
+                        >
+                          Open incident
+                        </div>
+                        <img
+                          class="x-icon"
+                          data-id="I65:222452;65:220285;19:2868;10:1398;1647:3551"
+                          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                          anima-src="https://anima-uploads.s3.amazonaws.com/projects/62f29f4d67ca433ae257c9c2/releases/62f2a972baaeeff7ab255b7f/img/trailing-icon@2x.svg"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="border"
+                    data-id="I65:222452;65:220285;19:2869"
+                  ></div>
+                  <div class="table-row" data-id="I65:222452;65:220285;23:7470">
+                    <div
+                      class="table-value-1"
+                      data-id="I65:222452;65:220285;23:7470;2:2241"
+                    >
+                      <div
+                        class="table-value-2 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;23:7470;2:2241;2:2216"
+                      >
+                        12/10/2020<br />@ 00:00
+                      </div>
+                    </div>
+                    <div
+                      class="table-value-3"
+                      data-id="I65:222452;65:220285;23:7470;2:2238"
+                    >
+                      <div
+                        class="table-value-4 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;23:7470;2:2238;2:2216"
+                      >
+                        000000-000000-ABC
+                      </div>
+                    </div>
+                    <div
+                      class="table-value-5"
+                      data-id="I65:222452;65:220285;23:7470;2:2239"
+                    >
+                      <p
+                        class="table-value-6 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;23:7470;2:2239;2:2216"
+                      >
+                        (000) - Incident type from list
+                      </p>
+                    </div>
+                    <div
+                      class="frame-5"
+                      data-id="I65:222452;65:220285;23:7470;9:5695"
+                    >
+                      <div
+                        class="table-value-7"
+                        data-id="I65:222452;65:220285;23:7470;9:2266"
+                      >
+                        <img
+                          class="line-icon-1"
+                          data-id="I65:222452;65:220285;23:7470;9:2266;2:2220"
+                          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                          anima-src="https://anima-uploads.s3.amazonaws.com/projects/62f29f4d67ca433ae257c9c2/releases/62f2a972baaeeff7ab255b7f/img/line-icon-6@2x.svg"
+                        />
+                        <div
+                          class="property-4 valign-text-middle opensans-semi-bold-black-14px"
+                          data-id="I65:222452;65:220285;23:7470;9:2266;2:2221"
+                        >
+                          Building
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="table-value"
+                      data-id="I65:222452;65:220285;23:7470;2:2243"
+                    >
+                      <div
+                        class="table-value-8 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;23:7470;2:2243;2:2216"
+                      >
+                        North Lecture Hall
+                      </div>
+                    </div>
+                    <div
+                      class="button-3"
+                      data-id="I65:222452;65:220285;23:7470;10:1398"
+                    >
+                      <div
+                        class="button border-1px-blue"
+                        data-id="I65:222452;65:220285;23:7470;10:1398;1665:2877"
+                      >
+                        <div
+                          class="label-1 opensans-semi-bold-blue-14px"
+                          data-id="I65:222452;65:220285;23:7470;10:1398;1510:2031"
+                        >
+                          Open incident
+                        </div>
+                        <img
+                          class="x-icon"
+                          data-id="I65:222452;65:220285;23:7470;10:1398;1647:3551"
+                          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                          anima-src="https://anima-uploads.s3.amazonaws.com/projects/62f29f4d67ca433ae257c9c2/releases/62f2a972baaeeff7ab255b7f/img/trailing-icon@2x.svg"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="border"
+                    data-id="I65:222452;65:220285;23:10251"
+                  ></div>
+                  <div class="table-row" data-id="I65:222452;65:220285;19:2870">
+                    <div
+                      class="table-value-1"
+                      data-id="I65:222452;65:220285;19:2870;2:2241"
+                    >
+                      <div
+                        class="table-value-2 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;19:2870;2:2241;2:2216"
+                      >
+                        08/25/2020<br />@ 00:00
+                      </div>
+                    </div>
+                    <div
+                      class="table-value-3"
+                      data-id="I65:222452;65:220285;19:2870;2:2238"
+                    >
+                      <div
+                        class="table-value-4 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;19:2870;2:2238;2:2216"
+                      >
+                        000000-000000-ABC
+                      </div>
+                    </div>
+                    <div
+                      class="table-value-5"
+                      data-id="I65:222452;65:220285;19:2870;2:2239"
+                    >
+                      <p
+                        class="table-value-6 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;19:2870;2:2239;2:2216"
+                      >
+                        (000) - Incident type from list
+                      </p>
+                    </div>
+                    <div
+                      class="frame-5"
+                      data-id="I65:222452;65:220285;19:2870;9:5695"
+                    >
+                      <div
+                        class="table-value-7"
+                        data-id="I65:222452;65:220285;19:2870;9:2266"
+                      >
+                        <img
+                          class="line-icon-1"
+                          data-id="I65:222452;65:220285;19:2870;9:2266;2:2220"
+                          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                          anima-src="https://anima-uploads.s3.amazonaws.com/projects/62f29f4d67ca433ae257c9c2/releases/62f2a972baaeeff7ab255b7f/img/line-icon-7@2x.svg"
+                        />
+                        <div
+                          class="property-5 valign-text-middle opensans-semi-bold-black-14px"
+                          data-id="I65:222452;65:220285;19:2870;9:2266;2:2221"
+                        >
+                          Occupant
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="table-value"
+                      data-id="I65:222452;65:220285;19:2870;2:2243"
+                    >
+                      <div
+                        class="table-value-9 valign-text-middle opensans-semi-bold-white-14px"
+                        data-id="I65:222452;65:220285;19:2870;2:2243;2:2216"
+                      >
+                        <span
+                          ><span class="opensans-semi-bold-black-14px"
+                            >Classroom 308<br /></span
+                          ><span class="opensans-semi-bold-pale-sky-14px"
+                            >Social Sciences Hall</span
+                          ></span
+                        >
+                      </div>
+                    </div>
+                    <div
+                      class="button-3"
+                      data-id="I65:222452;65:220285;19:2870;10:1398"
+                    >
+                      <div
+                        class="button border-1px-blue"
+                        data-id="I65:222452;65:220285;19:2870;10:1398;1665:2877"
+                      >
+                        <div
+                          class="label-1 opensans-semi-bold-blue-14px"
+                          data-id="I65:222452;65:220285;19:2870;10:1398;1510:2031"
+                        >
+                          Open incident
+                        </div>
+                        <img
+                          class="x-icon"
+                          data-id="I65:222452;65:220285;19:2870;10:1398;1647:3551"
+                          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                          anima-src="https://anima-uploads.s3.amazonaws.com/projects/62f29f4d67ca433ae257c9c2/releases/62f2a972baaeeff7ab255b7f/img/trailing-icon@2x.svg"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="border"
+                    data-id="I65:222452;65:220285;19:2871"
+                  ></div>
+                  <div class="table-row" data-id="I65:222452;65:220285;19:2872">
+                    <div
+                      class="table-value-1"
+                      data-id="I65:222452;65:220285;19:2872;2:2241"
+                    >
+                      <div
+                        class="table-value-2 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;19:2872;2:2241;2:2216"
+                      >
+                        01/30/2020<br />@ 00:00
+                      </div>
+                    </div>
+                    <div
+                      class="table-value-3"
+                      data-id="I65:222452;65:220285;19:2872;2:2238"
+                    >
+                      <div
+                        class="table-value-4 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;19:2872;2:2238;2:2216"
+                      >
+                        000000-000000-ABC
+                      </div>
+                    </div>
+                    <div
+                      class="table-value-5"
+                      data-id="I65:222452;65:220285;19:2872;2:2239"
+                    >
+                      <p
+                        class="table-value-6 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;19:2872;2:2239;2:2216"
+                      >
+                        (000) - Incident type from list
+                      </p>
+                    </div>
+                    <div
+                      class="frame-5"
+                      data-id="I65:222452;65:220285;19:2872;9:5695"
+                    >
+                      <div
+                        class="table-value-7"
+                        data-id="I65:222452;65:220285;19:2872;9:2266"
+                      >
+                        <img
+                          class="line-icon-1"
+                          data-id="I65:222452;65:220285;19:2872;9:2266;2:2220"
+                          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                          anima-src="https://anima-uploads.s3.amazonaws.com/projects/62f29f4d67ca433ae257c9c2/releases/62f2a972baaeeff7ab255b7f/img/line-icon-6@2x.svg"
+                        />
+                        <div
+                          class="property-6 valign-text-middle opensans-semi-bold-black-14px"
+                          data-id="I65:222452;65:220285;19:2872;9:2266;2:2221"
+                        >
+                          Building
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="table-value"
+                      data-id="I65:222452;65:220285;19:2872;2:2243"
+                    >
+                      <div
+                        class="table-value-8 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;19:2872;2:2243;2:2216"
+                      >
+                        Residence Hall 600
+                      </div>
+                    </div>
+                    <div
+                      class="button-3"
+                      data-id="I65:222452;65:220285;19:2872;10:1398"
+                    >
+                      <div
+                        class="button border-1px-blue"
+                        data-id="I65:222452;65:220285;19:2872;10:1398;1665:2877"
+                      >
+                        <div
+                          class="label-1 opensans-semi-bold-blue-14px"
+                          data-id="I65:222452;65:220285;19:2872;10:1398;1510:2031"
+                        >
+                          Open incident
+                        </div>
+                        <img
+                          class="x-icon"
+                          data-id="I65:222452;65:220285;19:2872;10:1398;1647:3551"
+                          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                          anima-src="https://anima-uploads.s3.amazonaws.com/projects/62f29f4d67ca433ae257c9c2/releases/62f2a972baaeeff7ab255b7f/img/trailing-icon@2x.svg"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="border"
+                    data-id="I65:222452;65:220285;19:2873"
+                  ></div>
+                  <div
+                    class="table-row"
+                    data-id="I65:222452;65:220285;23:10250"
+                  >
+                    <div
+                      class="table-value-1"
+                      data-id="I65:222452;65:220285;23:10250;2:2241"
+                    >
+                      <div
+                        class="table-value-2 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;23:10250;2:2241;2:2216"
+                      >
+                        11/02/2019<br />@ 00:00
+                      </div>
+                    </div>
+                    <div
+                      class="table-value-3"
+                      data-id="I65:222452;65:220285;23:10250;2:2238"
+                    >
+                      <div
+                        class="table-value-4 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;23:10250;2:2238;2:2216"
+                      >
+                        000000-000000-ABC
+                      </div>
+                    </div>
+                    <div
+                      class="table-value-5"
+                      data-id="I65:222452;65:220285;23:10250;2:2239"
+                    >
+                      <p
+                        class="table-value-6 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;23:10250;2:2239;2:2216"
+                      >
+                        (000) - Incident type from list
+                      </p>
+                    </div>
+                    <div
+                      class="frame-5"
+                      data-id="I65:222452;65:220285;23:10250;9:5695"
+                    >
+                      <div
+                        class="table-value-7"
+                        data-id="I65:222452;65:220285;23:10250;9:2266"
+                      >
+                        <img
+                          class="line-icon-1"
+                          data-id="I65:222452;65:220285;23:10250;9:2266;2:2220"
+                          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                          anima-src="https://anima-uploads.s3.amazonaws.com/projects/62f29f4d67ca433ae257c9c2/releases/62f2a972baaeeff7ab255b7f/img/line-icon-6@2x.svg"
+                        />
+                        <div
+                          class="property-7 valign-text-middle opensans-semi-bold-black-14px"
+                          data-id="I65:222452;65:220285;23:10250;9:2266;2:2221"
+                        >
+                          Building
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="table-value"
+                      data-id="I65:222452;65:220285;23:10250;2:2243"
+                    >
+                      <div
+                        class="table-value-8 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;23:10250;2:2243;2:2216"
+                      >
+                        Campus Services Center
+                      </div>
+                    </div>
+                    <div
+                      class="button-3"
+                      data-id="I65:222452;65:220285;23:10250;10:1398"
+                    >
+                      <div
+                        class="button border-1px-blue"
+                        data-id="I65:222452;65:220285;23:10250;10:1398;1665:2877"
+                      >
+                        <div
+                          class="label-1 opensans-semi-bold-blue-14px"
+                          data-id="I65:222452;65:220285;23:10250;10:1398;1510:2031"
+                        >
+                          Open incident
+                        </div>
+                        <img
+                          class="x-icon"
+                          data-id="I65:222452;65:220285;23:10250;10:1398;1647:3551"
+                          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                          anima-src="https://anima-uploads.s3.amazonaws.com/projects/62f29f4d67ca433ae257c9c2/releases/62f2a972baaeeff7ab255b7f/img/trailing-icon@2x.svg"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="border"
+                    data-id="I65:222452;65:220285;23:7471"
+                  ></div>
+                  <div class="table-row" data-id="I65:222452;65:220285;23:7472">
+                    <div
+                      class="table-value-1"
+                      data-id="I65:222452;65:220285;23:7472;2:2241"
+                    >
+                      <div
+                        class="table-value-2 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;23:7472;2:2241;2:2216"
+                      >
+                        09/20/2019<br />@ 00:00
+                      </div>
+                    </div>
+                    <div
+                      class="table-value-3"
+                      data-id="I65:222452;65:220285;23:7472;2:2238"
+                    >
+                      <div
+                        class="table-value-4 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;23:7472;2:2238;2:2216"
+                      >
+                        000000-000000-ABC
+                      </div>
+                    </div>
+                    <div
+                      class="table-value-5"
+                      data-id="I65:222452;65:220285;23:7472;2:2239"
+                    >
+                      <p
+                        class="table-value-6 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;23:7472;2:2239;2:2216"
+                      >
+                        (000) - Incident type from list
+                      </p>
+                    </div>
+                    <div
+                      class="frame-5"
+                      data-id="I65:222452;65:220285;23:7472;9:5695"
+                    >
+                      <div
+                        class="table-value-7"
+                        data-id="I65:222452;65:220285;23:7472;9:2266"
+                      >
+                        <img
+                          class="line-icon-1"
+                          data-id="I65:222452;65:220285;23:7472;9:2266;2:2220"
+                          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                          anima-src="https://anima-uploads.s3.amazonaws.com/projects/62f29f4d67ca433ae257c9c2/releases/62f2a972baaeeff7ab255b7f/img/line-icon-13@2x.svg"
+                        />
+                        <div
+                          class="property-8 valign-text-middle opensans-semi-bold-black-14px"
+                          data-id="I65:222452;65:220285;23:7472;9:2266;2:2221"
+                        >
+                          Occupant
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="table-value"
+                      data-id="I65:222452;65:220285;23:7472;2:2243"
+                    >
+                      <div
+                        class="table-value-9 valign-text-middle opensans-semi-bold-white-14px"
+                        data-id="I65:222452;65:220285;23:7472;2:2243;2:2216"
+                      >
+                        <span
+                          ><span class="opensans-semi-bold-black-14px"
+                            >Office 100<br /></span
+                          ><span class="opensans-semi-bold-pale-sky-14px"
+                            >Administration Building</span
+                          ></span
+                        >
+                      </div>
+                    </div>
+                    <div
+                      class="button-3"
+                      data-id="I65:222452;65:220285;23:7472;10:1398"
+                    >
+                      <div
+                        class="button border-1px-blue"
+                        data-id="I65:222452;65:220285;23:7472;10:1398;1665:2877"
+                      >
+                        <div
+                          class="label-1 opensans-semi-bold-blue-14px"
+                          data-id="I65:222452;65:220285;23:7472;10:1398;1510:2031"
+                        >
+                          Open incident
+                        </div>
+                        <img
+                          class="x-icon"
+                          data-id="I65:222452;65:220285;23:7472;10:1398;1647:3551"
+                          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                          anima-src="https://anima-uploads.s3.amazonaws.com/projects/62f29f4d67ca433ae257c9c2/releases/62f2a972baaeeff7ab255b7f/img/trailing-icon@2x.svg"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="border"
+                    data-id="I65:222452;65:220285;23:7473"
+                  ></div>
+                  <div
+                    class="table-row"
+                    data-id="I65:222452;65:220285;23:10252"
+                  >
+                    <div
+                      class="table-value-1"
+                      data-id="I65:222452;65:220285;23:10252;2:2241"
+                    >
+                      <div
+                        class="table-value-2 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;23:10252;2:2241;2:2216"
+                      >
+                        06/06/2019<br />@ 00:00
+                      </div>
+                    </div>
+                    <div
+                      class="table-value-3"
+                      data-id="I65:222452;65:220285;23:10252;2:2238"
+                    >
+                      <div
+                        class="table-value-4 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;23:10252;2:2238;2:2216"
+                      >
+                        000000-000000-ABC
+                      </div>
+                    </div>
+                    <div
+                      class="table-value-5"
+                      data-id="I65:222452;65:220285;23:10252;2:2239"
+                    >
+                      <p
+                        class="table-value-6 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;23:10252;2:2239;2:2216"
+                      >
+                        (000) - Incident type from list
+                      </p>
+                    </div>
+                    <div
+                      class="frame-5"
+                      data-id="I65:222452;65:220285;23:10252;9:5695"
+                    >
+                      <div
+                        class="table-value-7"
+                        data-id="I65:222452;65:220285;23:10252;9:2266"
+                      >
+                        <img
+                          class="line-icon-1"
+                          data-id="I65:222452;65:220285;23:10252;9:2266;2:2220"
+                          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                          anima-src="https://anima-uploads.s3.amazonaws.com/projects/62f29f4d67ca433ae257c9c2/releases/62f2a972baaeeff7ab255b7f/img/line-icon-13@2x.svg"
+                        />
+                        <div
+                          class="property-9 valign-text-middle opensans-semi-bold-black-14px"
+                          data-id="I65:222452;65:220285;23:10252;9:2266;2:2221"
+                        >
+                          Occupant
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="table-value"
+                      data-id="I65:222452;65:220285;23:10252;2:2243"
+                    >
+                      <div
+                        class="table-value-9 valign-text-middle opensans-semi-bold-white-14px"
+                        data-id="I65:222452;65:220285;23:10252;2:2243;2:2216"
+                      >
+                        <span
+                          ><span class="opensans-semi-bold-black-14px"
+                            >Transportation Services<br /></span
+                          ><span class="opensans-semi-bold-pale-sky-14px"
+                            >Campus Services Center</span
+                          ></span
+                        >
+                      </div>
+                    </div>
+                    <div
+                      class="button-3"
+                      data-id="I65:222452;65:220285;23:10252;10:1398"
+                    >
+                      <div
+                        class="button border-1px-blue"
+                        data-id="I65:222452;65:220285;23:10252;10:1398;1665:2877"
+                      >
+                        <div
+                          class="label-1 opensans-semi-bold-blue-14px"
+                          data-id="I65:222452;65:220285;23:10252;10:1398;1510:2031"
+                        >
+                          Open incident
+                        </div>
+                        <img
+                          class="x-icon"
+                          data-id="I65:222452;65:220285;23:10252;10:1398;1647:3551"
+                          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                          anima-src="https://anima-uploads.s3.amazonaws.com/projects/62f29f4d67ca433ae257c9c2/releases/62f2a972baaeeff7ab255b7f/img/trailing-icon@2x.svg"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="border"
+                    data-id="I65:222452;65:220285;23:10253"
+                  ></div>
+                  <div class="table-row" data-id="I65:222452;65:220285;19:2874">
+                    <div
+                      class="table-value-1"
+                      data-id="I65:222452;65:220285;19:2874;2:2241"
+                    >
+                      <div
+                        class="table-value-2 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;19:2874;2:2241;2:2216"
+                      >
+                        05/08/2019<br />@ 00:00
+                      </div>
+                    </div>
+                    <div
+                      class="table-value-3"
+                      data-id="I65:222452;65:220285;19:2874;2:2238"
+                    >
+                      <div
+                        class="table-value-4 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;19:2874;2:2238;2:2216"
+                      >
+                        000000-000000-ABC
+                      </div>
+                    </div>
+                    <div
+                      class="table-value-5"
+                      data-id="I65:222452;65:220285;19:2874;2:2239"
+                    >
+                      <p
+                        class="table-value-6 valign-text-middle opensans-semi-bold-black-14px"
+                        data-id="I65:222452;65:220285;19:2874;2:2239;2:2216"
+                      >
+                        (000) - Incident type from list
+                      </p>
+                    </div>
+                    <div
+                      class="frame-5"
+                      data-id="I65:222452;65:220285;19:2874;9:5695"
+                    >
+                      <div
+                        class="table-value-7"
+                        data-id="I65:222452;65:220285;19:2874;9:2266"
+                      >
+                        <img
+                          class="line-icon-1"
+                          data-id="I65:222452;65:220285;19:2874;9:2266;2:2220"
+                          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                          anima-src="https://anima-uploads.s3.amazonaws.com/projects/62f29f4d67ca433ae257c9c2/releases/62f2a972baaeeff7ab255b7f/img/line-icon-15@2x.svg"
+                        />
+                        <div
+                          class="property-10 valign-text-middle opensans-semi-bold-black-14px"
+                          data-id="I65:222452;65:220285;19:2874;9:2266;2:2221"
+                        >
+                          Occupant
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="table-value"
+                      data-id="I65:222452;65:220285;19:2874;2:2243"
+                    >
+                      <div
+                        class="table-value-9 valign-text-middle opensans-semi-bold-white-14px"
+                        data-id="I65:222452;65:220285;19:2874;2:2243;2:2216"
+                      >
+                        <span
+                          ><span class="opensans-semi-bold-black-14px"
+                            >Unit 504<br /></span
+                          ><span class="opensans-semi-bold-pale-sky-14px"
+                            >Residence Hall 600</span
+                          ></span
+                        >
+                      </div>
+                    </div>
+                    <div
+                      class="button-3"
+                      data-id="I65:222452;65:220285;19:2874;10:1398"
+                    >
+                      <div
+                        class="button border-1px-blue"
+                        data-id="I65:222452;65:220285;19:2874;10:1398;1665:2877"
+                      >
+                        <div
+                          class="label-1 opensans-semi-bold-blue-14px"
+                          data-id="I65:222452;65:220285;19:2874;10:1398;1510:2031"
+                        >
+                          Open incident
+                        </div>
+                        <img
+                          class="x-icon"
+                          data-id="I65:222452;65:220285;19:2874;10:1398;1647:3551"
+                          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                          anima-src="https://anima-uploads.s3.amazonaws.com/projects/62f29f4d67ca433ae257c9c2/releases/62f2a972baaeeff7ab255b7f/img/trailing-icon@2x.svg"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="border"
+                    data-id="I65:222452;65:220285;19:2875"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pagination" data-id="I65:222452;65:220285;19:2876">
+            <div class="pages" data-id="I65:222452;65:220285;19:2877">
+              <div
+                class="pagination-buttons"
+                data-id="I65:222452;65:220285;19:2894"
+              >
+                <div
+                  class="button-4"
+                  data-id="I65:222452;65:220285;19:2894;1727:9804"
+                >
+                  <div
+                    class="page valign-text-middle opensans-semi-bold-manatee-14px"
+                    data-id="I65:222452;65:220285;19:2894;1727:9805"
+                  >
+                    ‹
+                  </div>
+                </div>
+              </div>
+              <div
+                class="pagination-buttons"
+                data-id="I65:222452;65:220285;19:2895"
+              >
+                <div
+                  class="button-4"
+                  data-id="I65:222452;65:220285;19:2895;1727:9804"
+                >
+                  <div
+                    class="page valign-text-middle opensans-semi-bold-manatee-14px"
+                    data-id="I65:222452;65:220285;19:2895;1727:9805"
+                  >
+                    «
+                  </div>
+                </div>
+              </div>
+              <div
+                class="pagination-buttons"
+                data-id="I65:222452;65:220285;19:2896"
+              >
+                <div
+                  class="button-7"
+                  data-id="I65:222452;65:220285;19:2896;1727:9501"
+                >
+                  <div
+                    class="page valign-text-middle opensans-semi-bold-bright-gray-14px"
+                    data-id="I65:222452;65:220285;19:2896;1727:9502"
+                  >
+                    1
+                  </div>
+                </div>
+              </div>
+              <div
+                class="pagination-buttons"
+                data-id="I65:222452;65:220285;19:2897"
+              >
+                <div
+                  class="button-4"
+                  data-id="I65:222452;65:220285;19:2897;1727:9804"
+                >
+                  <div
+                    class="page valign-text-middle opensans-semi-bold-manatee-14px"
+                    data-id="I65:222452;65:220285;19:2897;1727:9805"
+                  >
+                    ›
+                  </div>
+                </div>
+              </div>
+              <div
+                class="pagination-buttons"
+                data-id="I65:222452;65:220285;19:2898"
+              >
+                <div
+                  class="button-4"
+                  data-id="I65:222452;65:220285;19:2898;1727:9804"
+                >
+                  <div
+                    class="page valign-text-middle opensans-semi-bold-manatee-14px"
+                    data-id="I65:222452;65:220285;19:2898;1727:9805"
+                  >
+                    »
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="field-input" data-id="I65:222452;65:220285;19:2899">
+              <div
+                class="field"
+                data-id="I65:222452;65:220285;19:2899;1689:6507"
+              >
+                <div
+                  class="text-w-leading-icon"
+                  data-id="I65:222452;65:220285;19:2899;1685:8736"
+                >
+                  <div
+                    class="value valign-text-middle"
+                    data-id="I65:222452;65:220285;19:2899;1685:8738"
+                  >
+                    20
+                  </div>
+                </div>
+                <div
+                  class="trailing-icon"
+                  data-id="I65:222452;65:220285;19:2899;1685:8739"
+                >
+                  <img
+                    class="trailing-icon-1"
+                    data-id="I65:222452;65:220285;19:2899;1685:8740"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                    anima-src="https://anima-uploads.s3.amazonaws.com/projects/62f29f4d67ca433ae257c9c2/releases/62f2a972baaeeff7ab255b7f/img/trailing-icon-11@2x.svg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="launchpad-js/launchpad-banner.js" async></script>
+    <script
+      defer
+      src="https://animaapp.s3.amazonaws.com/static/restart-btn.min.js"
+    ></script>
+  </body>
+</html>
